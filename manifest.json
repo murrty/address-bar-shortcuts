@@ -1,0 +1,39 @@
+{
+	"author":           "murrty",
+	"homepage_url":     "https://github.com/murrty/address-bar-shortcut",
+	"description":      "Directly connect to websites using the url bar, 'r/' & 'u/' for reddit, 'b/' for 4chan, 'b8/' for 8chan",
+	"manifest_version": 2,
+	"name":             "Address Bar Shortcuts",
+	"version":          "1.0",
+    
+	"browser_specific_settings": {
+		"gecko": {
+			"id": "@address.bar.shortcuts"
+		}
+	},
+    
+	"developer":        {
+		"name": "murrty",
+		"url":  "https://github.com/murrty/address-bar-shortcuts"
+	},
+    
+	"icons":            {
+		"48": "icon/48.png",
+		"96": "icon/96.png"
+	},
+    
+    "options_ui": {
+        "page": "notice.html"
+    },
+
+	"permissions": [
+		"webNavigation",
+		"tabs"
+	],
+ 
+	"background": {
+		"scripts": [
+			"redir.js"
+		]
+	}
+}
