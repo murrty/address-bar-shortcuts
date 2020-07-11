@@ -1,20 +1,20 @@
 {
 	"author":           "murrty",
-	"homepage_url":     "https://github.com/murrty/address-bar-shortcut",
+	"homepage_url":     "https://github.com/murrty/address-bar-shortcuts/tree/omnibox-4chan",
 	"description":      "Directly connect to websites using the url bar, 'r/' & 'u/' for reddit, 'b/' for 4chan, 'b8/' for 8chan",
 	"manifest_version": 2,
-	"name":             "Address Bar Shortcuts (8chan) (Omnibox)",
+	"name":             "Address Bar Shortcuts (4chan) (Omnibox)",
 	"version":          "1.0",
     
 	"browser_specific_settings": {
 		"gecko": {
-			"id": "@address.bar.shortcuts.omni.8chan"
+			"id": "@address.bar.shortcuts.omni.4chan"
 		}
 	},
     
 	"developer":        {
 		"name": "murrty",
-		"url":  "https://github.com/murrty/address-bar-shortcuts"
+		"url":  "https://github.com/murrty/address-bar-shortcuts/tree/omnibox-4chan"
 	},
     
 	"icons":            {
@@ -32,7 +32,7 @@
 	],
     
     "omnibox": {
-        "keyword": "b8"
+        "keyword": "b"
     },
  
 	"background": {
