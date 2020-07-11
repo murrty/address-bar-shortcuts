@@ -1,8 +1,8 @@
 browser.omnibox.setDefaultSuggestion({
-    description: "Address Bar Shortcuts (subreddit)"
+    description: "Address Bar Shortcuts (reddit user)"
 });
 
-const baseUrl = "https://reddit.com/r/";
+const baseUrl = "https://reddit.com/user/";
 
 function getMatchingProperties(input) {
     var result = [];

@@ -1,20 +1,20 @@
 {
 	"author":           "murrty",
-	"homepage_url":     "https://github.com/murrty/address-bar-shortcuts/tree/omnibox-reddit-sub",
-	"description":      "Directly connect to a subreddit by typing \"r <subreddit>\" in the url bar",
+	"homepage_url":     "https://github.com/murrty/address-bar-shortcuts/tree/omnibox-reddit-user",
+	"description":      "Directly connect to a reddit user by typing \"u <reddit user>\" in the url bar",
 	"manifest_version": 2,
-	"name":             "Address Bar Shortcuts (reddit-sub) (Omnibox)",
+	"name":             "Address Bar Shortcuts (reddit-user) (Omnibox)",
 	"version":          "1.0",
     
 	"browser_specific_settings": {
 		"gecko": {
-			"id": "@address.bar.shortcuts.omni.reddit-sub"
+			"id": "@address.bar.shortcuts.omni.reddit-user"
 		}
 	},
     
 	"developer":        {
 		"name": "murrty",
-		"url":  "https://github.com/murrty/address-bar-shortcuts/tree/omnibox-reddit-sub"
+		"url":  "https://github.com/murrty/address-bar-shortcuts/tree/omnibox-reddit-user"
 	},
     
 	"icons":            {
@@ -28,7 +28,7 @@
 	],
     
     "omnibox": {
-        "keyword": "r"
+        "keyword": "u"
     },
  
 	"background": {
