@@ -3,7 +3,7 @@
 	"homepage_url":     "https://github.com/murrty/address-bar-shortcut",
 	"description":      "Directly connect to websites using the url bar, 'r/' & 'u/' for reddit, 'b/' for 4chan, 'b8/' for 8chan",
 	"manifest_version": 2,
-	"name":             "Address Bar Shortcuts",
+	"name":             "Address Bar Shortcuts (Omnibox)",
 	"version":          "1.0",
     
 	"browser_specific_settings": {
@@ -30,10 +30,14 @@
 		"webNavigation",
 		"tabs"
 	],
+    
+    "omnibox": {
+        "keyword": "r"
+    },
  
 	"background": {
 		"scripts": [
-			"redir.js"
+			"background.js"
 		]
 	}
 }
