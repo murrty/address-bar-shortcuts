@@ -8,6 +8,13 @@ This uses "r/\<subreddit>", "u/\<user>", "b/\<board>", and "b8/\<board>" as comm
 # Omnibox
 This uses the omnibox for redirecting. Instead of having a forward-slash in the command, you use a space.
 
+The sources for each of them are available in the branches, or you can click one of the 5 below:  
+* [Omni-all](https://github.com/murrty/address-bar-shortcuts/tree/omnibox-all)   
+* [Omni-reddit-sub](https://github.com/murrty/address-bar-shortcuts/tree/omnibox-reddit-sub)  
+* [Omni-reddit-user](https://github.com/murrty/address-bar-shortcuts/tree/omnibox-reddit-user)  
+* [Omni-4chan](https://github.com/murrty/address-bar-shortcuts/tree/omnibox-4chan)  
+* [Omni-8chan](https://github.com/murrty/address-bar-shortcuts/tree/omnibox-8chan) 
+
 # Omnibox commands
 * "[r] r \<board>" - Directs to a reddit subreddit. (*omni-all.xpi*, *omni-reddit-sub.xpi*)
 * "[r] u \<user>" - Directs to a reddit user. (*omni-all.xpi*, *omni-reddit-user.xpi*)
