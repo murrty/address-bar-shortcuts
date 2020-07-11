@@ -14,7 +14,7 @@
     
 	"developer":        {
 		"name": "murrty",
-		"url":  "https://github.com/murrty/address-bar-shortcuts"
+		"url":  "https://github.com/murrty/address-bar-shortcuts/tree/omnibox-8chan"
 	},
     
 	"icons":            {
@@ -22,10 +22,6 @@
 		"96": "icon/96.png"
 	},
     
-    "options_ui": {
-        "page": "notice.html"
-    },
-
 	"permissions": [
 		"webNavigation",
 		"tabs"
