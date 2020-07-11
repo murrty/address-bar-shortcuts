@@ -8,22 +8,21 @@ const base8chan = "https://8kun.top/";
 
 function getMatchingProperties(input, type) {
     var result = [];
-    console.log(input);
-    if (input.split(' ').count > 1) {
-        console.log("count > 1")
+    var inputContent = input.split(' ');
+    if (inputContent.length > 1) {
         var baseUrl = "http://localhost/";
         switch (type) {
             case 0:
-                baseUrl = baseReddit + "r/" + input.split(' ')[1];
+                baseUrl = baseReddit + "r/" + inputContent[1];
                 break;
             case 1:
-                baseUrl = baseReddit + "u/" + input.split(' ')[1];
+                baseUrl = baseReddit + "u/" + inputContent[1];
                 break;
             case 2:
-                baseUrl = base4chan + input.split(' ')[1];
+                baseUrl = base4chan + inputContent[1];
                 break;
             case 3:
-                baseUrl = base8chan + input.split(' ')[1] + "/index.html";
+                baseUrl = base8chan + inputContent[1] + "/index.html";
                 break;
         }
         
@@ -37,47 +36,49 @@ function getMatchingProperties(input, type) {
 }
 
 browser.omnibox.onInputChanged.addListener((input, suggest) => {
-    var inputKeyword = "";
-    if (input.split(' ').count > 1) {
-        inputKeyword = input.split(' ')[0];
-    }
-    else {
-        inputKeyword = input;
-    }
-    switch(inputKeyword) {
-        case "r": // 0
-            suggest(getMatchingProperties(input, 0));
-            break;
-        case "u": case "user": // 1
-            suggest(getMatchingProperties(input, 1));
-            break;
-        case "b": // 2
-            suggest(getMatchingProperties(input, 2));
-            break;
-        case "b8": // 3
-            suggest(getMatchingProperties(input, 3));
-            break;
+    var inputContent = input.split(' ');
+    if (inputContent.length > 1) {        
+        switch(inputContent[0]) {
+            case "r":
+                suggest(getMatchingProperties(input, 0));
+                break;
+            case "u": case "user":
+                suggest(getMatchingProperties(input, 1));
+                break;
+            case "b":
+                suggest(getMatchingProperties(input, 2));
+                break;
+            case "b8":
+                suggest(getMatchingProperties(input, 3));
+                break;
+        }
     }
 });
 
-    browser.omnibox.onInputEntered.addListener((url, disposition) => {
-        var newUrl = "http://localhost/";
-        switch(url.split(' ')[0]) {
-            case "r": // 0
-                newUrl = baseReddit + "r/" + url.split(' ')[1];
+browser.omnibox.onInputEntered.addListener((url, disposition) => {
+    var inputContent = url.split(' ');
+    if (inputContent.length > 1) {
+        switch(inputContent[0]) {
+            case "r":
+                browser.tabs.update({
+                    url : baseReddit + "r/" + inputContent[1]
+                });
                 break;
-            case "u": case "user": // 1
-                newUrl = baseReddit + "u/" + url.split(' ')[1];
+            case "u": case "user":
+                browser.tabs.update({
+                    url : baseReddit + "u/" + inputContent[1]
+                });
                 break;
-            case "b": // 2
-                newUrl = base4chan + url.split(' ')[1];
+            case "b":
+                browser.tabs.update({
+                    url : base4chan + inputContent[1]
+                });
                 break;
-            case "b8": // 3
-                newUrl = base8chan + url.split(' ')[1] + "/index.html";
+            case "b8":
+                browser.tabs.update({
+                    url : base8chan + inputContent[1] + "/index.html"
+                });
                 break;
         }
-    
-    browser.tabs.update({
-    url : newUrl
-    });
+    }
 });
