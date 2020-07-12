@@ -8,7 +8,8 @@
     
 	"browser_specific_settings": {
 		"gecko": {
-			"id": "@address.bar.shortcuts.omni.reddit-user"
+			"id": "@address.bar.shortcuts.omni.reddit-user",
+            "strict_min_version": "52.0"
 		}
 	},
     
