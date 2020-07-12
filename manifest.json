@@ -1,14 +1,15 @@
 {
 	"author":           "murrty",
 	"homepage_url":     "https://github.com/murrty/address-bar-shortcuts/tree/omnibox-4chan",
-	"description":      "Directly connect to websites using the url bar, 'r/' & 'u/' for reddit, 'b/' for 4chan, 'b8/' for 8chan",
+	"description":      "Directly connect to a 4chan board by typing \"b <board>\" in the url bar",
 	"manifest_version": 2,
 	"name":             "Address Bar Shortcuts (4chan) (Omnibox)",
 	"version":          "1.0",
     
 	"browser_specific_settings": {
 		"gecko": {
-			"id": "@address.bar.shortcuts.omni.4chan"
+			"id": "@address.bar.shortcuts.omni.4chan",
+            "strict_min_version": "52.0"
 		}
 	},
     
@@ -21,10 +22,6 @@
 		"48": "icon/48.png",
 		"96": "icon/96.png"
 	},
-    
-    "options_ui": {
-        "page": "notice.html"
-    },
 
 	"permissions": [
 		"webNavigation",
