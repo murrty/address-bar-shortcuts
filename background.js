@@ -1,24 +1,49 @@
-var redirectToCatalog = document.querySelector("#use-catalog");
+browser.omnibox.setDefaultSuggestion({
+    description: "Address Bar Shortcuts (8chan)"
+});
 
-function saveOptions(e) {
-    e.preventDefault();
-    browser.storage.local.set({
-        catalog: redirectToCatalog.checked
-    });
+const baseUrl = "https://8kun.top/";
+var useCatalog = false;
+
+function getMatchingProperties(input) {
+    var result = [];
+    var suggestedUrl;
+    
+    if (useCatalog) { suggestedUrl = baseUrl + input + "/catalog.html"; }
+    else { suggestedUrl = baseUrl + input + "/index.html"; }
+    
+    let suggestion = {
+        content: suggestedUrl,
+        description: input
+    }
+    result.push(suggestion);
+    return result;
 }
 
-function restoreOptions() {
-    function setCurrentChoice(result) {
-        redirectToCatalog.checked = result.catalog;
-    }
 
+browser.omnibox.onInputChanged.addListener((input, suggest) => {
+    suggest(getMatchingProperties(input));
+});
+
+browser.omnibox.onInputEntered.addListener((url, disposition) => {
+    var navUrl = baseUrl + url;
+    if (useCatalog) {navUrl = baseUrl + url + "/catalog.html"; }
+    else {navUrl = baseUrl + url + "/index.html"; }
+    
+    browser.tabs.update({
+        url : navUrl
+    });
+});
+
+browser.omnibox.onInputStarted.addListener(() => {
     function onError(error) {
         console.log(`Error: ${error}`);
     }
 
-    var getting = browser.storage.local.get("catalog");
-    getting.then(setCurrentChoice, onError);
-}
+    function onGot(item) {
+        useCatalog = item.catalog;
+    }
 
-document.addEventListener('DOMContentLoaded', restoreOptions);
-document.querySelectorAll('input').forEach(element => element.addEventListener('change', saveOptions));
+    let getting = browser.storage.local.get("catalog");
+    getting.then(onGot, onError);
+});
