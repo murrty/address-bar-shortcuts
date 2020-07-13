@@ -25,11 +25,16 @@
 
 	"permissions": [
 		"webNavigation",
+        "storage",
 		"tabs"
 	],
     
     "omnibox": {
         "keyword": "r"
+    },
+    
+    "options_ui": {
+        "page": "settings.html"
     },
  
 	"background": {

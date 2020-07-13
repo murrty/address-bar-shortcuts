@@ -1,28 +1,48 @@
 browser.omnibox.setDefaultSuggestion({
-    description: "Address Bar Shortcuts"
+    description: "Address Bar Shortcuts (r, u, b, b8)"
 });
 
 const baseReddit = "https://reddit.com/";
 const base4chan = "https://boards.4chan.org/";
 const base8chan = "https://8kun.top/";
 
+var redirect4chan = true;
+var redirect8chan = true;
+var redirectRedditSub = true;
+var redirectRedditUser = true;
+
+var use8chanCatalog = false;
+
 function getMatchingProperties(input, type) {
     var result = [];
     var inputContent = input.split(' ');
     if (inputContent.length > 1) {
-        var baseUrl = "http://localhost/";
+        var baseUrl = "";
         switch (type) {
             case 0:
-                baseUrl = baseReddit + "r/" + inputContent[1];
+                if (redirectRedditSub){                    
+                    baseUrl = baseReddit + "r/" + inputContent[1];
+                }
                 break;
             case 1:
-                baseUrl = baseReddit + "u/" + inputContent[1];
+                if (redirectRedditUser) {
+                    baseUrl = baseReddit + "u/" + inputContent[1];
+                }
                 break;
             case 2:
-                baseUrl = base4chan + inputContent[1];
+                if (redirect4chan) {
+                    baseUrl = base4chan + inputContent[1];
+                }
                 break;
             case 3:
-                baseUrl = base8chan + inputContent[1] + "/index.html";
+                if (redirect8chan) {
+                    if (use8chanCatalog) {
+                        baseUrl = base8chan + inputContent[1] + "/catalog.html";
+                    }
+                    else {
+                        baseUrl = base8chan + inputContent[1] + "/index.html";
+                    }
+                }
                 break;
         }
         
@@ -60,25 +80,59 @@ browser.omnibox.onInputEntered.addListener((url, disposition) => {
     if (inputContent.length > 1) {
         switch(inputContent[0]) {
             case "r":
-                browser.tabs.update({
-                    url : baseReddit + "r/" + inputContent[1]
-                });
+                if (redirectRedditSub) {                    
+                    browser.tabs.update({
+                        url : baseReddit + "r/" + inputContent[1]
+                    });
+                }
                 break;
             case "u": case "user":
-                browser.tabs.update({
-                    url : baseReddit + "u/" + inputContent[1]
-                });
+                if (redirectRedditUser){                
+                    browser.tabs.update({
+                        url : baseReddit + "u/" + inputContent[1]
+                    });
+                }
                 break;
             case "b":
-                browser.tabs.update({
-                    url : base4chan + inputContent[1]
-                });
+                if (redirect4chan) {                    
+                    browser.tabs.update({
+                        url : base4chan + inputContent[1]
+                    });
+                }
                 break;
             case "b8":
-                browser.tabs.update({
-                    url : base8chan + inputContent[1] + "/index.html"
-                });
+                if (redirect8chan) {     
+                    var redirectUrl;
+                    if (use8chanCatalog) {
+                        redirectUrl = base8chan + inputContent[1] + "/catalog.html";
+                    }
+                    else {
+                        redirectUrl = base8chan + inputContent[1] + "/index.html";
+                    }
+                    browser.tabs.update({
+                        url : redirectUrl
+                    });
+                }
                 break;
         }
     }
+});
+
+browser.omnibox.onInputStarted.addListener(() => {
+    function onError(error) {
+        console.log(`Error: ${error}`);
+    }
+
+    function onGot(item) {
+        use8chanCatalog = item.catalog8ch;
+        redirect4chan = item.enable4chan;
+        redirect8chan = item.enable8chan;
+        redirectRedditSub = item.enableRedditSub;
+        redirectRedditUser = item.enableRedditUser;
+    }
+
+    let getting = browser.storage.local.get();
+    getting.then(onGot, onError);
+    
+    console.log("input started");
 });
