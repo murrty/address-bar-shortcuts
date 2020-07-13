@@ -2,15 +2,28 @@ var redirectRedditSub = true;
 var redirectRedditUser = true;
 var redirect4chan = true;
 var redirect8chan = true;
-var outputDebug = false;
+var use8chanCatalog = false;
 
 function addressShortcut( details ) {
-	var linkElement = document.createElement( 'a' );
+	var linkElement = document.createElement('a');
 	linkElement.href = details.url;
-    if (outputDebug) {
-        console.log("details.url: " + details.url);
-        console.log("linkElement.href: " + linkElement.href);
+    
+    console.log("called addressShortcut");
+
+    function onError(error) {
+        console.log(`Error: ${error}`);
     }
+
+    function onGot(item) {
+        redirect4chan = item.enable4chan || true;
+        redirect8chan = item.enable8chan || true;
+        redirectRedditSub = item.enableRedditSub || true;
+        redirectRedditUser = item.enableRedditUser || true;
+        use8chanCatalog = item.catalog8ch || false;
+    }
+
+    let getting = browser.storage.local.get();
+    getting.then(onGot, onError);
     
     switch (linkElement.hostname){
         case "r":
@@ -39,10 +52,16 @@ function addressShortcut( details ) {
             break;
         case "b8":
             if (redirect8chan) {
-                browser.tabs.update( {
-                        url: 'https://8kun.top' + linkElement.pathname + '/index.html'
-                    }
-                );
+                var baseUrl;
+                if (use8chanCatalog) {
+                    baseUrl = "https://8kun.top" + linkElement.pathname + "/index.html";
+                }
+                else {
+                    baseUrl = "https://8kun.top" + linkElement.pathname + "/catalog.html";
+                }
+                browser.tabs.update({
+                    url: baseUrl
+                });
             }
             break;
     }
@@ -50,9 +69,11 @@ function addressShortcut( details ) {
 
 browser.webNavigation.onBeforeNavigate.addListener(
 	addressShortcut, {
-		url: [ {
-				urlMatches: '.*'
-			}
-		]
+		url: [ {hostPrefix: "r"},
+               {hostPrefix: "u"},
+               {hostPrefix: "user"},
+               {hostPrefix: "b"},
+               {hostPrefix: "b8"}
+             ]
 	}
 );

@@ -23,11 +23,12 @@
 	},
     
     "options_ui": {
-        "page": "notice.html"
+        "page": "settings.html"
     },
 
 	"permissions": [
 		"webNavigation",
+        "storage",
 		"tabs"
 	],
  

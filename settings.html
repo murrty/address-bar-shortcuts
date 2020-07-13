@@ -1,0 +1,63 @@
+<!-- this is not used in the addon -->
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            background-color: #101114;
+        }
+        
+        label {
+            color: #2466b3;
+        }
+        
+        img {
+            position:absolute;
+            top: 12px;
+            left: 4%;
+            z-index: 2;
+        }
+        
+        .alert {
+            position: relative;
+            border: 1px solid rgb(195, 190, 80);
+            background: rgb(230, 220, 130);
+            padding: 10px 10px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            width: 93%;
+            left: 20px;
+            z-index: 1;
+        }
+    </style>
+  </head>
+
+  <body>
+    <img width="48" src="warning.png" />
+    <section class="alert">
+        &emsp;&emsp;&emsp;&emsp;In Firefox 77+, the following option(s) need to be set in about:config:<br />
+        &emsp;&emsp;&emsp;&emsp;&emsp;&bull;&nbsp;<i>keyword.enabled</i> = <b>false</b>
+    </section>
+    <form>
+        <label>Enable redirects:</label><br />
+        <input type="checkbox" id="redirect4chan" value="enable4chan"><label for="redirect4chan"> Enable redirecting to 4chan</label>
+        <br />
+        <input type="checkbox" id="redirect8chan" value="enable8chan"><label for="redirect8chan"> Enable redirecting to 8chan</label>
+        <br />
+        <input type="checkbox" id="redirectRedditSub" value="enableRedditSub"><label for="redirectRedditSub"> Enable redirecting to reddit subreddits</label>
+        <br />
+        <input type="checkbox" id="redirectRedditUser" value="enableRedditUser"><label for="redirectRedditUser"> Enable redirecting to reddit users</label>
+        <br /> <br />
+        <label>8chan-specific settings:</label><br />
+        <input type="checkbox" id="redirectToCatalog8ch" value="catalog8ch"><label for="redirectToCatalog8ch"> [8chan] Redirect to board catalog</label>
+        <br />
+    </form>
+
+    <script src="settings.js"></script>
+
+  </body>
+</html>
