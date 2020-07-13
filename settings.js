@@ -2,17 +2,14 @@ var redirectToCatalog = document.querySelector("#use-catalog");
 
 function saveOptions(e) {
     e.preventDefault();
-    var checkStatus = "false";
-    if (redirectToCatalog.checked == true) { checkStatus = "true"; }
     browser.storage.local.set({
-        catalog: checkStatus
+        catalog: redirectToCatalog.checked
     });
 }
 
 function restoreOptions() {
     function setCurrentChoice(result) {
-        if (result.catalog == "true") { redirectToCatalog.checked = true; }
-        else { redirectToCatalog.checked = false; }
+        redirectToCatalog.checked = result.catalog;
     }
 
     function onError(error) {
